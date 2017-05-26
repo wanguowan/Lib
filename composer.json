@@ -15,7 +15,7 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"wan\\Lib\\": "src"
+			"Wan\\Lib\\": "src"
 		}
 	}
 }
