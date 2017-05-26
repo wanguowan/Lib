@@ -1,0 +1,13 @@
+{
+    "name": "wan/lib",
+    "description": "函数",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "王安宁",
+            "email": "wanguowan521@163.com"
+        }
+    ],
+    "require": {}
+}
