@@ -136,4 +136,55 @@ Class CBasicLib
 				$bMustBePublic ? ( FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) : FILTER_DEFAULT
 			) );
 	}
+
+    public static function array_key_pluck( $array, $value )
+    {
+        $results = [];
+
+        $value = is_string( $value ) ? explode( '.', $value ) : $value;
+
+        foreach ( $array as $key => $item )
+        {
+            $itemValue = self::data_get( $item, $value );
+
+            // If the key is "null", we will just append the value to the array and keep
+            // looping. Otherwise we will key the array using the value of the key we
+            // received from the developer. Then we'll return the final array form.
+            if ( is_null( $key ) )
+            {
+                $results[] = $itemValue;
+            }
+            else
+            {
+                $results[ $key ] = $itemValue;
+            }
+        }
+
+        return $results;
+    }
+
+    public static function data_get( $arrTarget, $key, $default = null )
+    {
+        if ( is_null( $key ) )
+        {
+            return $arrTarget;
+        }
+
+        $key = is_array( $key ) ? $key : explode( '.', $key );
+
+        foreach ( $key as $segment )
+        {
+            if ( is_array( $arrTarget ) )
+            {
+                if ( ! array_key_exists( $segment, $arrTarget ) )
+                {
+                    return $default;
+                }
+
+                $arrTarget = $arrTarget[ $segment ];
+            }
+        }
+
+        return $arrTarget;
+    }
 }
